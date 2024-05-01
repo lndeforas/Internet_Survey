@@ -1,12 +1,14 @@
-RAWF="devices_raw_outputs"
-#mkdir $RAWF
+F="all_questions"
 
-LIST="p4_adhd p4_anx p4_sh p4_dep p4_ang p4_repet p4_sleep ' ' ,"
+LIST_DISEASES="p4_adhd p4_anx p4_sh p4_dep p4_ang p4_repet p4_sleep everyone"
+LIST_QUESTIONS="p5 p6 p7 p8 p9 p10 p11 p12 a4 a5 a6 a7 a8 a9 a10 a11"
 
-for i in $LIST
+for i in $LIST_DISEASES
 do
-    python3 script_devices.py $i > $RAWF/$i\_devices_output
-    python3 script_comp_laptop.py $i > $RAWF/$i\_comp_devices_output
+    for j in $LIST_QUESTIONS
+    do
+        python3 script_all_questions.py $i $j > $F/$i/$j\_output
+    done
 done
 
-python3 script_demography.py > $RAWF/demo_output
+python3 script_demography.py > $F/demography/demo_output
