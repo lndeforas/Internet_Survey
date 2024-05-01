@@ -6,17 +6,26 @@ import argparse
 parser=argparse.ArgumentParser()
 parser.add_argument("why")
 parser.add_argument("question")
+parser.add_argument("folder")
 args=parser.parse_args()
 why = args.why
 question = args.question
+folder = args.folder
 
-df = pd.read_csv('IS_LD_N61_corrected23032020.csv', sep=';')
-df = df.drop(columns=["a7_num_types", "a7_dontknow", "a9_num_addiction_sx", "a9_other", "a10_other", "a11_other",
-                      "p8_num_types", "p8_dontknow", "p9_other", "p10_other", "p10_num_addiction_sx", "p11_other", "p17_other",
-                      "a5_num_locations", "a4_num_appliances", "p6_num_locations", "p5_num_appliances"])
+df = pd.read_csv('Internet_Survey_v2.csv', sep=';')
+df = df.drop(columns=["clinic_ori", "p4_MH", "p4_other", "p5_TECH", "p5_mobilediff", "p5_gamediff", 
+                      "p5_compdiff", "p5_laptopdiff", "p5_tabletdiff", "p5_num_appliances", "a5_num_appliances", 
+                      "p5_appliancesdiff", 
+                      "p6_bedroomdiff", "p6_homediff", "p6_frienddiff", "p6_schooldiff", "p6_num_locations", 
+                      "a6_num_locations", "p6_WHERE",
+                      "p6_publicdiff", "p6_num_locationsdiff", "p7_WHEN", "p8_WHAT", "p8_dontknow", 
+                      "a8_dontknow", "p8_num_types", "a8_num_types", "p9_INTERPER", "p9_other", 
+                      "p10_HABIT", "p10_other", "a10_other", "p10_num_addiction_sx", 
+                      "a10_num_addiction_sx", "p11_TALK", "p11_other", "a11_other","p12_GOOD",
+                      "p_OTHERS"])
 
-folder_csv=f"all_questions/{why}"
-folder_graphs=f"all_questions/{why}"
+folder_csv=f"{folder}/{why}"
+folder_graphs=f"{folder}/{why}"
 
 if (why in df.columns) :
     reduced_df = df[df[why]==1]
